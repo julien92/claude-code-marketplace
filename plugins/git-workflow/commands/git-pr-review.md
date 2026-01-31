@@ -17,6 +17,7 @@ Help the user review a Pull Request with AI-assisted analysis. You will:
 3. Analyze each file and suggest comments
 4. Post inline comments
 5. Restore context
+6. Show final summary with PR link
 
 ## Step 1: Save context
 
@@ -253,13 +254,36 @@ If we stashed changes earlier:
 git stash pop
 ```
 
-Confirm to the user that their context has been restored.
+## Step 11: Final summary
+
+Present a complete summary of the review:
+
+```
+✅ PR Review Complete
+
+📋 Summary:
+- PR: #<number> - <title>
+- Files reviewed: X/Y
+- Comments posted: N
+
+💬 Comments posted:
+1. <filepath>:L<line> - "<comment summary>"
+2. <filepath>:L<line> - "<comment summary>"
+...
+
+🔗 View PR: <pr-url>
+```
+
+Get the PR URL:
+- **GitHub:** `gh pr view <pr-number> --json url -q .url`
+- **GitLab:** `glab mr view <mr-iid> --web` (or construct from remote URL)
+- **Bitbucket:** `https://bitbucket.org/{workspace}/{repo}/pull-requests/{pr_id}`
 
 ## Important notes
 
 - Always wait for user input between files
-- Keep track of all comments posted for final summary
-- If user says "done" at any point, skip to Step 9
+- Keep track of all comments posted for the final summary in Step 11
+- If user says "done" at any point, skip to Step 9 (finalize) then Step 10-11 (restore & summary)
 - Handle errors gracefully (network issues, auth problems)
 - For self-hosted GitLab/GitHub, the API endpoints remain the same but authentication must be configured
 - When piping command outputs (e.g., `curl | jq`), prefer saving to a temporary file first then processing, as direct pipes may fail in some execution contexts:
