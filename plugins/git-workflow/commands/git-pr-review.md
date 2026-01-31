@@ -106,8 +106,9 @@ BASE_BRANCH=$(jq -r '.destination.branch.name' /tmp/pr_info.json)
 
 ## Step 6: Get the list of changed files
 
-Fetch the base branch and get changed files:
+Get the absolute path of the repository root and fetch the changed files:
 ```bash
+REPO_ROOT=$(git rev-parse --show-toplevel)
 git fetch origin $BASE_BRANCH
 git diff origin/$BASE_BRANCH...HEAD --name-only
 ```
@@ -132,10 +133,10 @@ git diff origin/$BASE_BRANCH...HEAD -- <file>
    - Detected issues (bugs, security, logic problems, inconsistencies with existing code)
    - Suggested comments ready to post
 
-4. **Present to user** (IMPORTANT: `<filepath>` must be the full path from repo root, e.g. `src/main/java/com/example/MyClass.java`, not just the filename):
+4. **Present to user** (use $REPO_ROOT from Step 6 to build the absolute path):
 ```
 📄 File X/Y: <filepath> (+N/-M lines)
-📁 View full file: <filepath>:1
+📁 View full file: $REPO_ROOT/<filepath>:1
 
 📝 Changes:
 <Show the diff content here so user can see the modifications>
