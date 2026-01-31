@@ -114,6 +114,15 @@ git fetch origin $BASE_BRANCH
 git diff origin/$BASE_BRANCH...HEAD --name-only
 ```
 
+## Step 6.5: Read full diff for global context
+
+Before analyzing files individually, read the complete diff to understand the overall changes:
+```bash
+git diff origin/$BASE_BRANCH...HEAD
+```
+
+This gives you the full picture of all modifications. Use this context to provide better, more coherent suggestions during the file-by-file review (e.g., understanding how a new field flows through layers, spotting inconsistencies across files).
+
 ## Step 7: Review each file with AI assistance
 
 For each changed file:
