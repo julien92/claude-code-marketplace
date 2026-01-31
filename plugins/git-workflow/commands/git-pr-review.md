@@ -122,10 +122,11 @@ For each changed file:
 cat <file>
 ```
 
-2. **Show the diff** to see what changed:
+2. **Show the diff** and get the first modified line number:
 ```bash
 git diff origin/$BASE_BRANCH...HEAD -- <file>
 ```
+Extract `FIRST_LINE` from the first `@@` hunk header (e.g. `@@ -97,6 +97,7 @@` → line 97).
 
 3. **Analyze the code in context and provide:**
    - Brief summary of what the changes do
@@ -133,10 +134,10 @@ git diff origin/$BASE_BRANCH...HEAD -- <file>
    - Detected issues (bugs, security, logic problems, inconsistencies with existing code)
    - Suggested comments ready to post
 
-4. **Present to user** (`<filename>` = just the file name, `<filepath>` = path from repo root, use $REPO_ROOT from Step 6):
+4. **Present to user** (`<filename>` = just the file name, `<filepath>` = path from repo root, `$FIRST_LINE` = first modified line):
 ```
 📄 File X/Y: <filename> (+N/-M lines)
-📁 View full file: $REPO_ROOT/<filepath>:1
+📁 View full file: $REPO_ROOT/<filepath>:$FIRST_LINE
 
 📝 Changes:
 <Show the diff content here so user can see the modifications>
