@@ -15,11 +15,10 @@ description: Commit, push and create a Pull Request targeting the parent branch 
 
 Based on the above changes:
 
-1. Create a new branch if on main/master/develop
+1. Determine the parent branch and create a new branch if needed (see below)
 2. Create a single commit using Gitmoji format (see /git-commit for conventions)
 3. Push the branch to origin
-4. Detect the parent branch (the branch from which the current branch was created)
-5. Create a pull request targeting the parent branch
+4. Create a pull request targeting the parent branch
 
 ## Detect provider
 
@@ -32,24 +31,20 @@ If URL doesn't match (self-hosted), fall back to `$GIT_PROVIDER` env var.
 
 ## Detect parent branch
 
-The parent branch is the branch from which the current branch was created. Use this strategy:
+**Case 1: Currently on main/master/develop**
+- Create a new feature branch
+- The parent branch is the current branch (main/master/develop) — you already know it!
 
-1. Get candidate branches from remote (main, master, develop, and any other branches)
-2. For each candidate, find the merge-base with current branch
-3. The parent branch is the one with the most recent common ancestor (closest merge-base)
+**Case 2: Already on a feature branch**
+- No need to create a new branch
+- Detect the parent branch using merge-base strategy:
 
 ```bash
-# Get current branch
-CURRENT_BRANCH=$(git branch --show-current)
-
-# Find the parent branch by checking merge-base with common branches
-# Priority: check develop, main, master first, then other branches
 PARENT_BRANCH=""
 BEST_COUNT=999999
 
 for branch in develop main master; do
   if git rev-parse --verify "origin/$branch" >/dev/null 2>&1; then
-    # Count commits between merge-base and current HEAD
     MERGE_BASE=$(git merge-base "origin/$branch" HEAD 2>/dev/null)
     if [ -n "$MERGE_BASE" ]; then
       COUNT=$(git rev-list --count "$MERGE_BASE"..HEAD 2>/dev/null || echo 999999)
@@ -61,7 +56,6 @@ for branch in develop main master; do
   fi
 done
 
-# Fallback to main if nothing found
 PARENT_BRANCH=${PARENT_BRANCH:-main}
 ```
 
