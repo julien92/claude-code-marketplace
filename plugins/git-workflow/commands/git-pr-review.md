@@ -263,6 +263,7 @@ Present a complete summary of the review:
 
 📋 Summary:
 - PR: #<number> - <title>
+- Status: <approved ✅ | changes requested 🔄 | commented 💬 | skipped ⏭️>
 - Files reviewed: X/Y
 - Comments posted: N
 
