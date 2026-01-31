@@ -144,10 +144,10 @@ Also extract `FIRST_LINE` from the first `@@` hunk header (e.g. `@@ -97,6 +97,7 
    - Detected issues (bugs, security, logic problems, inconsistencies with existing code)
    - Suggested comments ready to post
 
-4. **Present to user** (`<filename>` = just the file name, `<filepath>` = path from repo root, `$FIRST_LINE` = first modified line):
+4. **Present to user** (`<filepath>` = path from repo root, `$FIRST_LINE` = first modified line):
 ```
-📄 File X/Y: <filename> (+N/-M lines)
-📁 View full file: $REPO_ROOT/<filepath>:$FIRST_LINE
+📄 [X/Y] $REPO_ROOT/<filepath>:$FIRST_LINE (+N/-M lines)
+🎯 PR: <brief one-line description of the PR objective>
 
 📝 Changes:
 <Show the diff content here so user can see the modifications>
@@ -155,17 +155,18 @@ Also extract `FIRST_LINE` from the first `@@` hunk header (e.g. `@@ -97,6 +97,7 
 🔍 Analysis:
 <Brief explanation of what this code does and how it fits in the existing structure>
 
-⚠️ Issues detected:
-- L:<line> → <description of issue>
-- L:<line> → <description of issue>
+💬 Review comments:
+1. L:<line> [<type>] <issue description>
+   → "<comment text to post>"
 
-💡 Suggested comments:
-1. "L:<line> - <suggested comment text>"
-2. "L:<line> - <suggested comment text>"
+2. L:<line> [<type>] <issue description>
+   → "<comment text to post>"
+
+Types: [bug] [security] [perf] [style] [logic] [question]
 
 Actions:
-- "1" → post suggestion 1
-- "2" → post suggestion 2
+- "1" → post comment 1
+- "2" → post comment 2
 - "edit 1 <your text>" → modify and post
 - "add L:<line> <message>" → custom comment
 - "next" → next file
