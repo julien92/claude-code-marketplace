@@ -1,7 +1,7 @@
 {
   "name": "git-workflow",
   "description": "AI-powered Git workflows: smart commits, PR creation, changelogs, and releases for GitHub, GitLab, and Bitbucket",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": {
     "name": "Julien Cornille",
     "email": "julien.cornille92@gmail.com"

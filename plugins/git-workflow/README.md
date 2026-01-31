@@ -20,6 +20,7 @@ claude plugin install git-workflow@julien92-plugins
 | Command | Description |
 |---------|-------------|
 | `/git-commit` | Review diff + generate Gitmoji commit message |
+| `/git-commit-push` | Commit with Gitmoji + push to remote |
 | `/git-commit-push-pr` | Commit + push + create PR (GitHub/GitLab/Bitbucket) |
 | `/git-changelog` | Generate changelog between two tags |
 | `/git-help-rebase` | Interactive assistant to resolve rebase conflicts |
