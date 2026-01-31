@@ -135,6 +135,7 @@ git diff origin/$BASE_BRANCH...HEAD -- <file>
 4. **Present to user:**
 ```
 📄 File X/Y: <filepath> (+N/-M lines)
+📁 View full file: <filepath>:1
 
 📝 Changes:
 <Show the diff content here so user can see the modifications>
