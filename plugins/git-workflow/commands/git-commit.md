@@ -22,6 +22,7 @@ Based on the above changes, create a single git commit.
    - Write concisely using an informal tone
    - Do not use specific names or files from the code
    - Do not use phrases like "this commit", "this change", etc.
+   - If branch contains a ticket reference (e.g. `JIRA-123`, `PROJ-456`), add it as a footer: `Refs: JIRA-123`
 
 Common Gitmojis (see https://gitmoji.dev for full list):
 - ✨ New feature
@@ -38,13 +39,15 @@ Common Gitmojis (see https://gitmoji.dev for full list):
 - 💥 Breaking change
 - ⏪️ Revert
 
-Example:
+Example (branch: `feature/JIRA-123-auth`):
 ```
 ✨ Add user authentication
 
 - Implement OAuth2 flow
 - Add session management
 - Handle token refresh
+
+Refs: JIRA-123
 ```
 
 You have the capability to call multiple tools in a single response. Stage and create the commit using a single message. Do not use any other tools or do anything else.
