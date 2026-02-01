@@ -32,12 +32,14 @@ git stash push -m "git-review-context-$(date +%s)"
 
 ## Step 2: Detect provider
 
-Detect from remote URL:
-- Contains `github.com` → GitHub
-- Contains `gitlab.com` → GitLab
-- Contains `bitbucket.org` → Bitbucket
+Use the shared detection script:
+```bash
+PROVIDER=$(bash ${CLAUDE_PLUGIN_ROOT}/scripts/detect-provider.sh)
+```
 
-If URL doesn't match (self-hosted), fall back to `$GIT_PROVIDER` env var.
+Returns: `github`, `gitlab`, `bitbucket`, or `unknown`
+
+For self-hosted instances, set `$GIT_PROVIDER` env var.
 
 ## Step 3: List open PRs
 
