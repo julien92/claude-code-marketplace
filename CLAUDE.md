@@ -257,9 +257,25 @@ fi
 
 ## Testing
 
+### Local Development
+
+Use the `--plugin-dir` flag to test plugins during development (no installation required):
+
+```bash
+claude --plugin-dir ./plugins/git-workflow
+```
+
+For multiple plugins:
+
+```bash
+claude --plugin-dir ./plugins/git-workflow --plugin-dir ./plugins/other-plugin
+```
+
+Restart Claude Code after each modification to reload changes.
+
 ### Manual Testing
 
-1. Install plugin locally: `claude plugin install ./plugins/<plugin>`
+1. Launch Claude with `--plugin-dir` flag
 2. Test each command with various scenarios
 3. Test with different Git providers
 4. Verify cleanup of temporary files
@@ -324,7 +340,7 @@ If user accepted:
 
 1. Create feature branch from `main`
 2. Develop command/skill/docs
-3. Test locally with `claude plugin install ./plugins/<plugin>`
+3. Test locally with `claude --plugin-dir ./plugins/<plugin>`
 4. Commit with Gitmoji conventions
 5. Create PR with clear description
 6. Merge to `main`
