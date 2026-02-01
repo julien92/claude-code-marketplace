@@ -82,15 +82,16 @@ Replace `<PARENT_BRANCH>` with the detected parent branch.
 
 ## Bitbucket PR
 
-Extract workspace and repo from remote URL:
-- `git@bitbucket.org:workspace/repo.git` → workspace, repo
-- `https://bitbucket.org/workspace/repo.git` → workspace, repo
-- `https://user@bitbucket.org/workspace/repo.git` → workspace, repo
+Extract workspace and repo using the shared script:
+```bash
+eval $(bash ${CLAUDE_PLUGIN_ROOT}/scripts/parse-bitbucket-url.sh)
+# Sets: BB_WORKSPACE, BB_REPO
+```
 
 Create PR with curl (Basic Auth with BITBUCKET_EMAIL:BITBUCKET_API_TOKEN):
 ```bash
 curl --silent --request POST \
-  --url "https://api.bitbucket.org/2.0/repositories/{workspace}/{repo}/pullrequests" \
+  --url "https://api.bitbucket.org/2.0/repositories/${BB_WORKSPACE}/${BB_REPO}/pullrequests" \
   --user "${BITBUCKET_EMAIL}:${BITBUCKET_API_TOKEN}" \
   --header 'Content-Type: application/json' \
   --data '{

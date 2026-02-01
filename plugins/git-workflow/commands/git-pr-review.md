@@ -41,6 +41,12 @@ Returns: `github`, `gitlab`, `bitbucket`, or `unknown`
 
 For self-hosted instances, set `$GIT_PROVIDER` env var.
 
+For Bitbucket, also extract workspace and repo:
+```bash
+eval $(bash ${CLAUDE_PLUGIN_ROOT}/scripts/parse-bitbucket-url.sh)
+# Sets: BB_WORKSPACE, BB_REPO
+```
+
 ## Step 3: List open PRs
 
 **GitHub:**
@@ -54,10 +60,9 @@ glab mr list --state opened --per-page 20
 ```
 
 **Bitbucket:**
-Extract workspace and repo from remote URL, then:
 ```bash
 curl -sN -u "${BITBUCKET_EMAIL}:${BITBUCKET_API_TOKEN}" \
-  "https://api.bitbucket.org/2.0/repositories/{workspace}/{repo}/pullrequests?state=OPEN&pagelen=20" \
+  "https://api.bitbucket.org/2.0/repositories/${BB_WORKSPACE}/${BB_REPO}/pullrequests?state=OPEN&pagelen=20" \
   > /tmp/bitbucket_prs.json && \
   jq -r '.values[] | "PR #\(.id) | \(.source.branch.name) -> \(.destination.branch.name) | \(.title) | by \(.author.display_name)"' /tmp/bitbucket_prs.json
 ```
@@ -105,7 +110,7 @@ BASE_BRANCH=$(glab api projects/:fullpath/merge_requests/<mr-iid> -q .target_bra
 **Bitbucket:**
 ```bash
 curl -sN -u "${BITBUCKET_EMAIL}:${BITBUCKET_API_TOKEN}" \
-  "https://api.bitbucket.org/2.0/repositories/{workspace}/{repo}/pullrequests/{pr_id}" > /tmp/pr_info.json
+  "https://api.bitbucket.org/2.0/repositories/${BB_WORKSPACE}/${BB_REPO}/pullrequests/{pr_id}" > /tmp/pr_info.json
 BASE_BRANCH=$(jq -r '.destination.branch.name' /tmp/pr_info.json)
 ```
 
@@ -207,7 +212,7 @@ For deleted lines, use `old_path` and `old_line` instead.
 **Bitbucket:**
 ```bash
 curl -X POST -u "${BITBUCKET_EMAIL}:${BITBUCKET_API_TOKEN}" \
-  "https://api.bitbucket.org/2.0/repositories/{workspace}/{repo}/pullrequests/{pr_id}/comments" \
+  "https://api.bitbucket.org/2.0/repositories/${BB_WORKSPACE}/${BB_REPO}/pullrequests/{pr_id}/comments" \
   -H "Content-Type: application/json" \
   -d '{
     "content": {"raw": "<comment>"},
@@ -246,10 +251,10 @@ glab mr note <mr-iid> --message "<summary>"
 ```bash
 # Approve
 curl -X POST -u "${BITBUCKET_EMAIL}:${BITBUCKET_API_TOKEN}" \
-  "https://api.bitbucket.org/2.0/repositories/{workspace}/{repo}/pullrequests/{pr_id}/approve"
+  "https://api.bitbucket.org/2.0/repositories/${BB_WORKSPACE}/${BB_REPO}/pullrequests/{pr_id}/approve"
 # or Request changes (post comment)
 curl -X POST -u "${BITBUCKET_EMAIL}:${BITBUCKET_API_TOKEN}" \
-  "https://api.bitbucket.org/2.0/repositories/{workspace}/{repo}/pullrequests/{pr_id}/comments" \
+  "https://api.bitbucket.org/2.0/repositories/${BB_WORKSPACE}/${BB_REPO}/pullrequests/{pr_id}/comments" \
   -H "Content-Type: application/json" \
   -d '{"content": {"raw": "<summary>"}}'
 ```
@@ -289,7 +294,7 @@ Present a complete summary of the review:
 Get the PR URL:
 - **GitHub:** `gh pr view <pr-number> --json url -q .url`
 - **GitLab:** `glab mr view <mr-iid> --web` (or construct from remote URL)
-- **Bitbucket:** `https://bitbucket.org/{workspace}/{repo}/pull-requests/{pr_id}`
+- **Bitbucket:** `https://bitbucket.org/${BB_WORKSPACE}/${BB_REPO}/pull-requests/{pr_id}`
 
 ## Important notes
 
