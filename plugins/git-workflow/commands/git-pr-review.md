@@ -153,7 +153,7 @@ Also extract `FIRST_LINE` from the first `@@` hunk header (e.g. `@@ -97,6 +97,7 
 4. **Present to user** — **IMPORTANT: Follow this exact format for IDE clickability:**
 ```
 📄 [X/Y] (+N/-M lines)
-$REPO_ROOT/<filepath>:$FIRST_LINE
+▸ $REPO_ROOT/<filepath>:$FIRST_LINE
 
 🎯 PR: <brief one-line description of the PR objective>
 
