@@ -35,7 +35,7 @@ claude plugin install git-workflow@julien92-plugins
 ```
 /git-commit
 ```
-Claude reviews your staged changes and suggests a Gitmoji commit message.
+Claude reviews your staged changes and suggests a Gitmoji commit message. If your branch contains a ticket reference (e.g. `feature/JIRA-123-login`), it's automatically added as a footer (`Refs: JIRA-123`).
 
 ### Full Workflow
 ```
@@ -44,12 +44,14 @@ Claude reviews your staged changes and suggests a Gitmoji commit message.
 Commits your changes, pushes to remote, and creates a PR on GitHub/GitLab/Bitbucket.
 
 - Creates a new branch if on main/master/develop
-- Uses Gitmoji commit format:
+- Uses Gitmoji commit format with automatic ticket reference:
   ```
   ✨ Add user authentication
 
   - Implement OAuth2 flow
   - Add session management
+
+  Refs: JIRA-123
   ```
 - Auto-detects provider from remote URL (github.com, gitlab.com, bitbucket.org)
 - **Targets the parent branch**: automatically detects the branch from which your feature branch was created (e.g., if you branched from `develop`, the PR targets `develop`)
