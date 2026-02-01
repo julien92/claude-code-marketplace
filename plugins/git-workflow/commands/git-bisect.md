@@ -10,49 +10,39 @@ argument-hint: "[bad-commit] [good-commit]"
 - Recent commits: !`git log --oneline -15`
 - Tags: !`git tag --sort=-version:refname | head -5`
 
-## Your task
+## Instructions
 
 Find the commit that introduced a bug using `git bisect run` with a test script.
 
-### Step 1: Get info from user
+### 1. Gather information
 
-Ask:
-1. **What's the bug?**
-2. **Bad commit** (default: HEAD)
-3. **Good commit** (a tag or older commit where it worked)
+Ask the user:
+1. What's the bug?
+2. Bad commit (default: HEAD)
+3. Good commit (a tag or older commit where it worked)
 
-### Step 2: Create test script
+### 2. Create test script
 
 Create `./bisect-test.sh` at repo root:
 - Exit 0 → bug **NOT present** (good commit)
 - Exit 1 → bug **IS present** (bad commit)
 - Exit 125 → can't test (skip)
 
-```bash
-#!/bin/bash
-# bisect-test.sh - Returns 0 if bug is ABSENT, 1 if PRESENT
+Show the script to user and get confirmation before continuing.
 
-<commands to reproduce and check the bug>
-```
+### 3. Run bisect
 
 ```bash
 chmod +x ./bisect-test.sh
-```
-
-**Show the script and confirm with user before continuing.**
-
-### Step 3: Run bisect
-
-```bash
 git bisect start <bad> <good>
 git bisect run ./bisect-test.sh
 ```
 
-### Step 4: Show result
+### 4. Show result
 
 Display the culprit commit with `git show` and explain what likely caused the bug.
 
-### Step 5: Cleanup
+### 5. Cleanup
 
 ```bash
 git bisect reset
@@ -61,7 +51,7 @@ rm ./bisect-test.sh
 
 ---
 
-## Examples
+## Script examples
 
 **API returns 500:**
 ```bash
