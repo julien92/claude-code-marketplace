@@ -152,7 +152,8 @@ Also extract `FIRST_LINE` from the first `@@` hunk header (e.g. `@@ -97,6 +97,7 
 
 4. **Present to user** (`<filepath>` = path from repo root, `$FIRST_LINE` = first modified line):
 ```
-📄 [X/Y] $REPO_ROOT/<filepath>:$FIRST_LINE (+N/-M lines)
+📄 [X/Y] (+N/-M lines)
+$REPO_ROOT/<filepath>:$FIRST_LINE
 🎯 PR: <brief one-line description of the PR objective>
 
 📝 Changes:
