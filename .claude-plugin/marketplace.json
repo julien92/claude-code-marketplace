@@ -22,9 +22,6 @@
       },
       "source": "./plugins/git-workflow",
       "repository": "https://github.com/julien92/claude-plugins",
-      "bugs": {
-        "url": "https://github.com/julien92/claude-plugins/issues"
-      },
       "license": "MIT",
       "keywords": [
         "git",
@@ -43,18 +40,7 @@
         "enterprise",
         "ai-powered",
         "multi-provider"
-      ],
-      "features": [
-        "AI-powered Git workflow automation",
-        "Multi-provider support (GitHub, GitLab, Bitbucket)",
-        "Intelligent code review with inline comments",
-        "Automated commit message generation",
-        "Release and changelog management"
-      ],
-      "requirements": {
-        "claudeCode": ">=2.0.0",
-        "git": ">=2.0.0"
-      }
+      ]
     }
   ]
 }
