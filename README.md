@@ -1,4 +1,4 @@
-# julien92-plugins
+# jc-marketplace
 
 Productivity plugins for [Claude Code](https://claude.com/blog/claude-code-plugins).
 
@@ -6,15 +6,15 @@ Productivity plugins for [Claude Code](https://claude.com/blog/claude-code-plugi
 
 ```bash
 # 1. Add this marketplace
-claude plugin marketplace add julien92/claude-plugins
+claude plugin marketplace add julien92/jc-marketplace
 
 # 2. Install a plugin
-claude plugin install git-workflow@julien92-plugins
+claude plugin install git-workflow@jc-marketplace
 ```
 
 Or use the community CLI (one command):
 ```bash
-npx claude-plugins install git-workflow@julien92-plugins
+npx claude-plugins install git-workflow@jc-marketplace
 ```
 
 ## 📦 Available Plugins
