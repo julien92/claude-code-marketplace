@@ -21,7 +21,7 @@ Based on the above changes:
 3. Push the branch to origin
 4. Create a pull request targeting the parent branch
 
-**If Provider cache shows "not cached"**, follow the `plugin-cache` skill to create it, then continue.
+**If Provider cache shows "not cached"**, create the cache file at `.claude/jc-marketplace/git-workflow/cache.md` following the `plugin-cache` skill, then continue.
 
 Based on the **provider** in cache:
 - `github` → use `gh pr create`

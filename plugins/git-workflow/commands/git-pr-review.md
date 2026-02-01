@@ -21,7 +21,7 @@ Help the user review a Pull Request with AI-assisted analysis. You will:
 5. Restore context
 6. Show final summary with PR link
 
-**If Provider cache shows "not cached"**, follow the `plugin-cache` skill to create it, then continue.
+**If Provider cache shows "not cached"**, create the cache file at `.claude/jc-marketplace/git-workflow/cache.md` following the `plugin-cache` skill, then continue.
 
 Based on the **provider** in cache:
 - `github` → use `gh` CLI

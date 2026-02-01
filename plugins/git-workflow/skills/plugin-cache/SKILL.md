@@ -59,25 +59,33 @@ For Bitbucket, extract workspace and repo from the remote URL:
 | `git@bitbucket.org:myworkspace/myrepo.git` | `myworkspace` | `myrepo` |
 | `https://bitbucket.org/myworkspace/myrepo.git` | `myworkspace` | `myrepo` |
 
-### Step 3: Create cache directory
+### Step 3: Create cache directory and write file
 
-Create the directory in the **repository root** (not home directory):
+**CRITICAL: The exact path must be `.claude/jc-marketplace/git-workflow/cache.md`**
+
+Do NOT use:
+- `~/.claude/...` (home directory)
+- `.claude/cache.md` (missing subdirectories)
+- `.claude/git-workflow.local.md` (wrong filename)
+
+First, create the directory structure:
 
 ```bash
-mkdir -p "$(git rev-parse --show-toplevel)/.claude/jc-marketplace/git-workflow"
+mkdir -p .claude/jc-marketplace/git-workflow
 ```
 
-### Step 4: Write cache file
-
-Use the Write tool to create the cache file at the **absolute path**:
+Then, use the Write tool to create the file at this exact path:
 
 ```
-<repository-root>/.claude/jc-marketplace/git-workflow/cache.md
+.claude/jc-marketplace/git-workflow/cache.md
 ```
 
-Where `<repository-root>` is the output of `git rev-parse --show-toplevel`.
+**Example:** If repository is at `/home/user/myproject`, the cache file must be:
+```
+/home/user/myproject/.claude/jc-marketplace/git-workflow/cache.md
+```
 
-### Step 5: Continue
+### Step 4: Continue
 
 After creating the cache, continue with the original command.
 
