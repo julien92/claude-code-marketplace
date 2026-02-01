@@ -20,7 +20,7 @@ claude plugin install git-workflow@julien92-plugins
 
 | Command | Description |
 |---------|-------------|
-| `/git-commit` | Review diff + generate Gitmoji commit message |
+| `/git-commit` | Analyze changes and generate meaningful commits |
 | `/git-commit-push` | Commit with Gitmoji + push to remote |
 | `/git-commit-push-pr` | Commit + push + create PR targeting parent branch (GitHub/GitLab/Bitbucket) |
 | `/git-changelog` | Generate changelog between two tags |
@@ -44,15 +44,7 @@ Claude reviews your staged changes and suggests a Gitmoji commit message. If you
 Commits your changes, pushes to remote, and creates a PR on GitHub/GitLab/Bitbucket.
 
 - Creates a new branch if on main/master/develop
-- Uses Gitmoji commit format with automatic ticket reference:
-  ```
-  ✨ Add user authentication
-
-  - Implement OAuth2 flow
-  - Add session management
-
-  Refs: JIRA-123
-  ```
+- Uses `/git-commit` conventions
 - Auto-detects provider from remote URL (github.com, gitlab.com, bitbucket.org)
 - **Targets the parent branch**: automatically detects the branch from which your feature branch was created (e.g., if you branched from `develop`, the PR targets `develop`)
 
