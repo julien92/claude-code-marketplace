@@ -5,5 +5,16 @@
   "author": {
     "name": "Julien Cornille",
     "email": "julien.cornille92@gmail.com"
-  }
+  },
+  "repository": "https://github.com/julien92/claude-code-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "git",
+    "workflow",
+    "pull-request",
+    "code-review",
+    "github",
+    "gitlab",
+    "bitbucket"
+  ]
 }
