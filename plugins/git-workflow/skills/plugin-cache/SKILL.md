@@ -16,9 +16,13 @@ This skill manages the provider cache for git-workflow commands. The cache store
 
 ## Cache location
 
+The cache file is stored **in the current repository**, not in the user's home directory:
+
 ```
-.claude/jc-marketplace/git-workflow/cache.md
+<repository-root>/.claude/jc-marketplace/git-workflow/cache.md
 ```
+
+**IMPORTANT:** This is a project-local file (`.claude/` relative to the git repository root), NOT `~/.claude/` in the home directory.
 
 ## Cache format
 
@@ -57,13 +61,21 @@ For Bitbucket, extract workspace and repo from the remote URL:
 
 ### Step 3: Create cache directory
 
+Create the directory in the **repository root** (not home directory):
+
 ```bash
-mkdir -p .claude/jc-marketplace/git-workflow
+mkdir -p "$(git rev-parse --show-toplevel)/.claude/jc-marketplace/git-workflow"
 ```
 
 ### Step 4: Write cache file
 
-Use the Write tool to create `.claude/jc-marketplace/git-workflow/cache.md` with the detected values.
+Use the Write tool to create the cache file at the **absolute path**:
+
+```
+<repository-root>/.claude/jc-marketplace/git-workflow/cache.md
+```
+
+Where `<repository-root>` is the output of `git rev-parse --show-toplevel`.
 
 ### Step 5: Continue
 
@@ -71,10 +83,10 @@ After creating the cache, continue with the original command.
 
 ## Refreshing the cache
 
-Delete the cache file and re-run any git-workflow command:
+Delete the cache file (in the repository root) and re-run any git-workflow command:
 
 ```bash
-rm .claude/jc-marketplace/git-workflow/cache.md
+rm "$(git rev-parse --show-toplevel)/.claude/jc-marketplace/git-workflow/cache.md"
 ```
 
 ## Example
