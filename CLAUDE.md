@@ -244,16 +244,34 @@ All Git commands must support:
 
 ### Detection Pattern
 
+Use the shared scripts in `plugins/<plugin>/scripts/`:
+
 ```bash
-remote_url=$(git remote get-url origin)
-if [[ "$remote_url" == *"github"* ]]; then
-  # Use gh CLI
-elif [[ "$remote_url" == *"gitlab"* ]]; then
-  # Use glab CLI
-elif [[ "$remote_url" == *"bitbucket"* ]]; then
-  # Use curl + jq with BITBUCKET_EMAIL/BITBUCKET_API_TOKEN
-fi
+# Detect provider
+PROVIDER=$(bash ${CLAUDE_PLUGIN_ROOT}/scripts/detect-provider.sh)
+# Returns: github | gitlab | bitbucket | unknown
+
+# For Bitbucket, extract workspace and repo
+eval $(bash ${CLAUDE_PLUGIN_ROOT}/scripts/parse-bitbucket-url.sh)
+# Sets: BB_WORKSPACE, BB_REPO
 ```
+
+## Shell Scripts
+
+Scripts in `plugins/<plugin>/scripts/` must:
+
+1. **Use portable shebang**: `#!/usr/bin/env bash`
+2. **Be called with bash**: `bash ${CLAUDE_PLUGIN_ROOT}/scripts/...`
+3. **Avoid BASH_REMATCH**: Use parameter expansion instead (zsh uses `$match`, not `$BASH_REMATCH`)
+
+This ensures scripts work regardless of user's default shell (bash or zsh).
+
+### Available Scripts
+
+| Script | Usage | Output |
+|--------|-------|--------|
+| `detect-provider.sh` | `PROVIDER=$(bash .../detect-provider.sh)` | `github`, `gitlab`, `bitbucket`, `unknown` |
+| `parse-bitbucket-url.sh` | `eval $(bash .../parse-bitbucket-url.sh)` | Sets `BB_WORKSPACE`, `BB_REPO` |
 
 ## Testing
 

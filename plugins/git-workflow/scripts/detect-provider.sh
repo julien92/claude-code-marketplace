@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Detect Git provider from remote URL
 # Returns: github | gitlab | bitbucket | unknown
 #
